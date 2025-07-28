@@ -1,4 +1,6 @@
 data = readtable("src.xls");
-data.Date = datetime(data.Date, "InputFormat", "yyyy-MM-dd");
+x = data.Date;
+x_num = datenum(x);
 y = data.Times;
-model = f
+model = fit(x_num, y, "fourier4");
+plot(model, x_num, y);
