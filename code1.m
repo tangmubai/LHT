@@ -1,6 +1,6 @@
 data = readtable("src.xls");
 x = data.Date;
-x_num = datenum(x);
 y = data.Times;
-model = fit(x_num, y, "fourier4");
+T = timetable(x, y);
+model = array2timetable
 plot(model, x_num, y);
