@@ -2,5 +2,12 @@ data = readtable("src.xls");
 x = data.Date;
 y = data.Times;
 T = timetable(x, y);
-model = array2timetable
-plot(model, x_num, y);
+Md1 = arima("Constant", 0, "D", 1, "Seasonality", 0, "ARLags", 1:2, "MALags", 1);
+EstMd = estimate(Md1, y);
+N = 80;
+[y_forecast, y_forecast_MSE] = forecast(EstMd, N, "Y0", y);
+futureDates = x(end) + days(1:N);
+plot(x, y, "o"); hold on;
+plot(futureDates, y_forecast, "-r");
+legend("History", "Forecast");
+xlabel("Date"); ylabel("Times");
